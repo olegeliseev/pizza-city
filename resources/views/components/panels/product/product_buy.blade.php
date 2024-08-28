@@ -1,7 +1,7 @@
-<!-- Buy block -->
+@props(['product'])
 <div class="buy-block">
     <span class="buy-block__grams">500г</span>
-    <span class="buy-block__price">679₽</span>
+    <span class="buy-block__price">{{ $product->price }}₽</span>
     <form action="#">
         <a href="#" class="buy-block__btn">
             <svg class="inline-block h-6 w-6 mr-2" height="20px" width="20px" fill="none"

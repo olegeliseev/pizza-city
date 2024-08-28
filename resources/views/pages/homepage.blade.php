@@ -2,8 +2,12 @@
     <section class="content-section">
         <x-panels.banners.banners/>
 
-        <x-panels.menu.homepage.popular-section/>
+        @if ($hitProducts->isNotEmpty())
+            <x-panels.menu.homepage.popular-section :products="$hitProducts"/>
+        @endif
 
-        <x-panels.menu.homepage.new-section/>
+        @if ($newProducts->isNotEmpty())
+            <x-panels.menu.homepage.new-section :products="$newProducts"/>
+        @endif
     </section>
 </x-layouts.app>

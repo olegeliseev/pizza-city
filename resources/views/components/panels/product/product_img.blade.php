@@ -1,1 +1,2 @@
-<a href="#" class="product-page-img"><img src="/assets/images/pizza_4-cheese.png" alt="pizza_4-cheese"></a>
+@props(['product'])
+<a href="{{ route('product', $product) }}" class="product-page-img"><img src="{{ $product->image }}" alt="{{ $product->name }}"></a>

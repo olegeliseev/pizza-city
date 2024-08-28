@@ -2,7 +2,7 @@
     <div class="top-nav">
         <div class="container">
                 <span class="logo">
-                    <a href="#">
+                    <a href="{{ route('home') }}">
                         <span>pizza</span>
                         <svg class="pizza-icon" fill="#f96908" height="50px" width="50px" version="1.1" id="Capa_1"
                              xmlns="http://www.w3.org/2000/svg"
@@ -49,14 +49,14 @@
                 </div>
             </div>
             <ul class="categories burger-menu__categories">
-                <li class="category"><a href="#" class="category__link">Меню</a></li>
+                <li class="category"><a href="{{ route('menu') }}" class="@if (request()->routeIs('menu')) active @endif category__link">Меню</a></li>
                 <li class="category"><a href="#" class="category__link">Пиццы</a></li>
                 <li class="category"><a href="#" class="category__link">Закуски</a></li>
                 <li class="category"><a href="#" class="category__link">Напитки</a></li>
                 <li class="category"><a href="#" class="category__link">Дессерты</a></li>
             </ul>
             <ul class="categories">
-                <li class="category"><a href="#" class="category__link">Меню</a></li>
+                <li class="category"><a href="{{ route('menu') }}" class="@if (request()->routeIs('menu')) active @endif category__link">Меню</a></li>
                 <li class="category"><a href="#" class="category__link">Пиццы</a></li>
                 <li class="category"><a href="#" class="category__link">Закуски</a></li>
                 <li class="category"><a href="#" class="category__link">Напитки</a></li>
