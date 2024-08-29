@@ -5,9 +5,5 @@
     </div>
     <div class="description-block__content">
         <p>{{ $product->description }}</p>
-        <br>
-        @isset($product->ingredients)
-            <p>Ингредиенты: {{ $product->ingredients }}</p>
-        @endisset
     </div>
 </div>

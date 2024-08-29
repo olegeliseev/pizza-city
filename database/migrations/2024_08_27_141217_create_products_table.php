@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('price');
+            $table->float('price');
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->text('ingredients')->nullable();
-            $table->integer('energy_value')->nullable();
-            $table->integer('proteins')->nullable();
-            $table->integer('fats')->nullable();
-            $table->integer('carbohydrates')->nullable();
+            $table->float('energy_value')->nullable();
+            $table->float('proteins')->nullable();
+            $table->float('fats')->nullable();
+            $table->float('carbohydrates')->nullable();
             $table->boolean('new')->default(false);
             $table->boolean('hit')->default(false);
             $table->timestamps();

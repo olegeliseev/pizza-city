@@ -13,7 +13,9 @@
 
     {{ $breadcrumbs ?? '' }}
 
-    {{ $slot }}
+    <section class="content-section">
+        {{ $slot }}
+    </section>
 
     <x-layouts.parts.footer/>
 </div>

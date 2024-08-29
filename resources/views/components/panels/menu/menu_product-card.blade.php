@@ -9,7 +9,7 @@
     <div class="product-card__content">
         <div class="product-card__body">
             <span class="product-card__title">{{ $product->name }}</span>
-            <p class="product-card__description">{{ $product->ingredients }}</p>
+            <p class="product-card__description">{{ $product->description }}</p>
         </div>
         <div class="product-card__info">
             <div class="product-card__price">{{ $product->price }}₽</div>

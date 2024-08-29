@@ -1,12 +1,9 @@
 <x-layouts.app page-title="Меню">
-    <section class="content-section">
+    <x-panels.breadcrumbs/>
 
-        <x-panels.breadcrumbs/>
+    <x-panels.search.search-bar/>
 
-        <x-panels.search.search-bar/>
+    <x-panels.menu.menu :products="$products"/>
 
-        <x-panels.menu.menu :products="$products" />
-
-        <x-panels.pagination/>
-    </section>
+    <x-panels.pagination/>
 </x-layouts.app>
