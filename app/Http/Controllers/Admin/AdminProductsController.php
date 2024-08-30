@@ -61,9 +61,12 @@ class AdminProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, Product $product, FlashMessageContract $flashMessage): RedirectResponse
-    {
-        $product->update($request->validated());
+    public function update(
+        ProductRequest $request,
+        Product $product,
+        FlashMessageContract $flashMessage
+    ): RedirectResponse {
+        $product->update(array_merge($request->validated(), ['new' => $request->has('new'), 'hit' => $request->has('hit')]));
         $flashMessage->success('Товар успешно обновлен');
         return back();
     }

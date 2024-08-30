@@ -24,6 +24,14 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required',
             'price' => 'required',
+            'image' => ['sometimes', 'nullable', 'string'],
+            'description' => '',
+            'energy_value' => '',
+            'proteins' => '',
+            'fats' => '',
+            'carbohydrates' => '',
+            'new' => 'boolean',
+            'hit' => 'boolean',
         ];
     }
 }

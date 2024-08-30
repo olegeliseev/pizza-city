@@ -49,6 +49,9 @@
                 </div>
             </div>
             <ul class="categories burger-menu__categories">
+                @admin()
+                    <li class="category"><a href="{{ route('admin.admin') }}" class="@if (request()->routeIs('admin.admin')) active @endif category__link">Админ</a></li>
+                @endadmin
                 <li class="category"><a href="{{ route('menu') }}" class="@if (request()->routeIs('menu')) active @endif category__link">Меню</a></li>
                 <li class="category"><a href="#" class="category__link">Пиццы</a></li>
                 <li class="category"><a href="#" class="category__link">Закуски</a></li>
@@ -56,6 +59,9 @@
                 <li class="category"><a href="#" class="category__link">Дессерты</a></li>
             </ul>
             <ul class="categories">
+                @admin()
+                <li class="category"><a href="{{ route('admin.admin') }}" class="@if (request()->routeIs('admin.admin')) active @endif category__link">Админ</a></li>
+                @endadmin
                 <li class="category"><a href="{{ route('menu') }}" class="@if (request()->routeIs('menu')) active @endif category__link">Меню</a></li>
                 <li class="category"><a href="#" class="category__link">Пиццы</a></li>
                 <li class="category"><a href="#" class="category__link">Закуски</a></li>

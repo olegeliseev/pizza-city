@@ -11,8 +11,8 @@ class PagesController extends Controller
 {
     public function home (): Factory|View|Application
     {
-        $hitProducts = Product::where('hit', true)->limit(4)->get();
-        $newProducts = Product::where('new', true)->limit(4)->get();
+        $hitProducts = Product::latest()->where('hit', true)->limit(4)->get();
+        $newProducts = Product::latest()->where('new', true)->limit(4)->get();
 
         return view('pages.homepage', ['hitProducts' => $hitProducts, 'newProducts' => $newProducts]);
     }

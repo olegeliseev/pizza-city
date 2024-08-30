@@ -51,7 +51,7 @@
     <label class="form-block__label" for="energy-value-field">Энергетическая ценность:</label>
     <div class="energy-value-block">
         <input class="form__input form__input-number" name="energy_value" placeholder="265" id="energy-value-field"
-               type="number" value="{{ old('energy_value', $product->energy_value) }}">
+               type="number" step="any" value="{{ old('energy_value', $product->energy_value) }}">
         <span class="energy-value-block__text">ккал</span>
     </div>
 </div>
@@ -60,7 +60,7 @@
     <label class="form-block__label" for="proteins-field">Белки:</label>
     <div class="energy-value-block">
         <input class="form__input form__input-number" name="proteins" placeholder="12.6" id="proteins-field"
-               type="number" value="{{ old('proteins', $product->proteins) }}">
+               type="number" step="any" value="{{ old('proteins', $product->proteins) }}">
         <span class="energy-value-block__text">г</span>
     </div>
 </div>
@@ -68,7 +68,7 @@
 <div class="form-block">
     <label class="form-block__label" for="fats-field">Жиры:</label>
     <div class="energy-value-block">
-        <input class="form__input form__input-number" name="fats" placeholder="12.1" id="fats-field" type="number"
+        <input class="form__input form__input-number" name="fats" placeholder="12.1" id="fats-field" type="number" step="any"
                value="{{ old('fats', $product->fats) }}">
         <span class="energy-value-block__text">г</span>
     </div>
@@ -78,18 +78,18 @@
     <label class="form-block__label" for="carbohydrates-field">Углеводы:</label>
     <div class="energy-value-block">
         <input class="form__input form__input-number" name="carbohydrates" placeholder="26.4" id="carbohydrates-field"
-               type="number" value="{{ old('carbohydrates', $product->carbohydrates) }}">
+               type="number" step="any" value="{{ old('carbohydrates', $product->carbohydrates) }}">
         <span class="energy-value-block__text">г</span>
     </div>
 </div>
 
 <div class="form-block__checkbox">
-    <input class="form__checkbox" name="new" type="checkbox" id="new-field" @checked(old('new', $product->new))>
+    <input class="form__checkbox" name="new" type="checkbox" id="new-field" @checked(old('new', $product->new)) value="{{ old('new', $product->new) }}">
     <label class="form-block__label" for="new-field">Новинка</label>
 </div>
 
 <div class="form-block__checkbox">
-    <input class="form__checkbox" name="hit" type="checkbox" id="hit-field" @checked(old('hit', $product->hit))>
+    <input class="form__checkbox" name="hit" type="checkbox" id="hit-field" @checked(old('hit', $product->hit)) value="{{ old('hit', $product->hit) }}">
     <label class="form-block__label" for="hit-field">Хит</label>
 </div>
 
