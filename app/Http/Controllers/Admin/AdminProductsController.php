@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
+use App\Contracts\Services\FlashMessageContract;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\Foundation\Application;
@@ -34,10 +35,11 @@ class AdminProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request): RedirectResponse
+    public function store(ProductRequest $request, FlashMessageContract $flashMessage): RedirectResponse
     {
         Product::create($request->validated());
-        return back();
+        $flashMessage->success('Товар успешно создан');
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -59,18 +61,20 @@ class AdminProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, Product $product): RedirectResponse
+    public function update(ProductRequest $request, Product $product, FlashMessageContract $flashMessage): RedirectResponse
     {
         $product->update($request->validated());
+        $flashMessage->success('Товар успешно обновлен');
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product): RedirectResponse
+    public function destroy(Product $product, FlashMessageContract $flashMessage): RedirectResponse
     {
         $product->delete();
+        $flashMessage->success('Товар удален');
         return back();
     }
 }
