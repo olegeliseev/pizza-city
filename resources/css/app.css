@@ -157,7 +157,7 @@ body {
     color: #000;
 }
 
-/* search-bar */
+/* filter-bar */
 .search-bar .container {
     background-color: var(--main-background-color);
     padding: 30px 30px 0 30px;
@@ -237,9 +237,11 @@ body {
 }
 
 .sort-list__item {
-    margin-left: 30px;
-    text-decoration: none;
-    color: #000;
+    margin-left: 14px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .sort-list__item.active {
@@ -1494,7 +1496,7 @@ body {
         margin-top: 150px;
     }
 
-    /* search-bar */
+    /* filter-bar */
     .search-row {
         display: flex;
         flex-direction: column;
