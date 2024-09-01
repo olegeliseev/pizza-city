@@ -14,7 +14,7 @@
 <div class="form-block">
     <label class="form-block__label" for="file-field">Изображение:</label>
     <div class="form-block__preview">
-        <img src="@isset($product->image) {{ $product->image }} @else /assets/images/no_product.svg @endisset"
+        <img src="{{ $product->image }}"
              alt="{{ $product->name }}">
     </div>
     <input class="form__input form__input-file" name="image" id="file-field" type="file">

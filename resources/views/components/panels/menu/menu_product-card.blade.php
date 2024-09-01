@@ -5,7 +5,7 @@
         <div class="hit-tag">Хит</div>
     @endif
     <a href="{{ route('product', $product) }}"><img class="product-card__img"
-                                                    src="@isset($product->image) {{ $product->image }} @else /assets/images/no_product.svg @endisset" alt="{{ $product->name }}"></a>
+                                                    src="{{ $product->image }}" alt="{{ $product->name }}"></a>
     <div class="product-card__content">
         <div class="product-card__body">
             <span class="product-card__title">{{ $product->name }}</span>
