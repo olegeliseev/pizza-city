@@ -16,7 +16,7 @@
         <tr>
             <td>{{ $product->id }}</td>
             <td>{{ $product->name }}</td>
-            <td>{{ $product->price }} ₽</td>
+            <td><x-panels.price :price="$product->price"/></td>
             <td>Пиццы</td>
             <td>@if($product->new)
                     Да

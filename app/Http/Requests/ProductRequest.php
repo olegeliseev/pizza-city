@@ -34,4 +34,12 @@ class ProductRequest extends FormRequest
             'hit' => 'boolean',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'Это поле не может быть пустым
+required' => 'Это поле не может быть пустым',
+        ];
+    }
 }

@@ -12,7 +12,7 @@
             <p class="product-card__description">{{ $product->description }}</p>
         </div>
         <div class="product-card__info">
-            <div class="product-card__price">{{ $product->price }}₽</div>
+            <div class="product-card__price"><x-panels.price :price="$product->price"/></div>
             <a class="product-card__btn" href="">В корзину</a>
         </div>
     </div>
