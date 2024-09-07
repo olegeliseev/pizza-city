@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -31,6 +32,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => false,
                 'hit' => true,
+                'category_id' => 1,
             ],
             [
                 'name' => 'Карбонара',
@@ -43,6 +45,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => false,
                 'hit' => true,
+                'category_id' => 1,
             ],
             [
                 'name' => 'Пепперони',
@@ -55,6 +58,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => false,
                 'hit' => true,
+                'category_id' => 1,
             ],
             [
                 'name' => 'Четыре сезона',
@@ -67,6 +71,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => false,
                 'hit' => true,
+                'category_id' => 1,
             ],
             [
                 'name' => 'Капрезе',
@@ -79,6 +84,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => true,
                 'hit' => false,
+                'category_id' => 1,
             ],
             [
                 'name' => 'Альфредо',
@@ -91,6 +97,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => true,
                 'hit' => false,
+                'category_id' => 1,
             ],
             [
                 'name' => 'Чизбургер',
@@ -103,6 +110,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => true,
                 'hit' => false,
+                'category_id' => 1,
             ],
             [
                 'name' => 'Сицилийская',
@@ -115,6 +123,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => true,
                 'hit' => false,
+                'category_id' => 1,
             ],
             [
                 'name' => 'Картофель по-деревенски',
@@ -127,6 +136,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => false,
                 'hit' => false,
+                'category_id' => 2,
             ],
             [
                 'name' => 'Куриные наггетсы',
@@ -139,6 +149,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => false,
                 'hit' => false,
+                'category_id' => 2,
             ],
             [
                 'name' => 'Evervess Cola',
@@ -151,6 +162,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => false,
                 'hit' => false,
+                'category_id' => 3,
             ],
             [
                 'name' => 'Чизкейк',
@@ -163,6 +175,7 @@ class ProductSeeder extends Seeder
                 'carbohydrates' => 26.4,
                 'new' => false,
                 'hit' => false,
+                'category_id' => 4,
             ],
         ];
     }

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 window.jQuery = window.$ = $;
 
-import Swiper from 'swiper';
+import Swiper from 'swiper/bundle';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';

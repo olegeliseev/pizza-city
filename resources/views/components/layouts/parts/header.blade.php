@@ -24,27 +24,7 @@
     </div>
     <div class="bottom-nav">
         <div class="container">
-            <div class="burger-menu">
-                <div class="bar">
-                    <span class="bar-1"> </span>
-                    <span class="bar-2"> </span>
-                    <span class="bar-3"> </span>
-                </div>
-            </div>
-            <ul class="categories burger-menu__categories">
-                <li class="category"><a href="{{ route('menu') }}" class="@if (request()->routeIs('menu')) active @endif category__link">Меню</a></li>
-                <li class="category"><a href="#" class="category__link">Пиццы</a></li>
-                <li class="category"><a href="#" class="category__link">Закуски</a></li>
-                <li class="category"><a href="#" class="category__link">Напитки</a></li>
-                <li class="category"><a href="#" class="category__link">Дессерты</a></li>
-            </ul>
-            <ul class="categories">
-                <li class="category"><a href="{{ route('menu') }}" class="@if (request()->routeIs('menu')) active @endif category__link">Меню</a></li>
-                <li class="category"><a href="#" class="category__link">Пиццы</a></li>
-                <li class="category"><a href="#" class="category__link">Закуски</a></li>
-                <li class="category"><a href="#" class="category__link">Напитки</a></li>
-                <li class="category"><a href="#" class="category__link">Дессерты</a></li>
-            </ul>
+            <x-panels.category-menu/>
         </div>
     </div>
 </header>

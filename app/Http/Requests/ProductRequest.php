@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
@@ -32,14 +33,14 @@ class ProductRequest extends FormRequest
             'carbohydrates' => '',
             'new' => 'boolean',
             'hit' => 'boolean',
+            'category_id' => ['exists:' . Category::class . ',id'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'Это поле не может быть пустым
-required' => 'Это поле не может быть пустым',
+            'required' => 'Это поле не может быть пустым',
         ];
     }
 }

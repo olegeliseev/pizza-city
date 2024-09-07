@@ -9,7 +9,7 @@ use Illuminate\Routing\Router;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
 
-Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
+Route::get('/menu/{slug?}', [MenuController::class, 'menu'])->name('menu');
 
 Route::get('/products/{product}', [MenuController::class, 'product'])->name('product');
 

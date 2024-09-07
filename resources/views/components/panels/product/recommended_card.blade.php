@@ -1,8 +1,8 @@
 <div class="swiper-slide recommended-card">
-    <a href="#"><img class="recommended-card__img"
-                     src="/assets/images/snack_country-style-potatoes.png"
-                     alt="country-style-potatoes"></a>
-    <p class="recommended-card__title">Картофель по-деревенски</p>
-    <p class="recommended-card__price">189₽</p>
+    <a href="{{ route('product', $product) }}" class="recommended-card__img-container"><img class="recommended-card__img"
+                     src="{{ $product->image }}"
+                     alt="{{ $product->name }}"></a>
+    <p class="recommended-card__title">{{ $product->name }}</p>
+    <p class="recommended-card__price"><x-panels.price :price="$product->price"/></p>
     <a href="#" class="recommended-card__btn">Добавить</a>
 </div>

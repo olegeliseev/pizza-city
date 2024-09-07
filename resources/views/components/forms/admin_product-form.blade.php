@@ -39,11 +39,10 @@
 
 <div class="form-block">
     <label class="form-block__label" for="category-field">Категория:</label>
-    <select class="form__input form__input-select" id="category-field">
-        <option value="pizza" selected>Пиццы</option>
-        <option value="snack">Закуски</option>
-        <option value="drink">Напитки</option>
-        <option value="dessert">Дессерты</option>
+    <select class="form__input form__input-select" name="category_id" id="category-field">
+        @foreach ($categories as $category)
+            <option @selected($category->id == old('category_id', $product->category_id)) value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
     </select>
 </div>
 

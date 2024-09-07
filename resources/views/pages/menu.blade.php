@@ -1,7 +1,7 @@
 <x-layouts.app page-title="Меню">
     <x-panels.breadcrumbs/>
 
-    <x-panels.filter.filter/>
+    <x-panels.filter.filter :currentCategory="$currentCategory"/>
 
     <x-panels.menu.menu :products="$products"/>
 
