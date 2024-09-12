@@ -83,12 +83,18 @@
 </div>
 
 <div class="form-block__checkbox">
-    <input class="form__checkbox" name="new" type="checkbox" id="new-field" @checked(old('new', $product->new)) value="{{ old('new', $product->new) }}">
+    <input class="form__checkbox" name="new" type="checkbox" id="new-field" @checked(old('new', $product->new)) value="1">
     <label class="form-block__label" for="new-field">Новинка</label>
+    @error('new')
+    <span class="form__validation-error">{{ $message }}</span>
+    @enderror
 </div>
 
 <div class="form-block__checkbox">
-    <input class="form__checkbox" name="hit" type="checkbox" id="hit-field" @checked(old('hit', $product->hit)) value="{{ old('hit', $product->hit) }}">
+    <input class="form__checkbox" name="hit" type="checkbox" id="hit-field" @checked(old('hit', $product->hit)) value="1">
+    @error('hit')
+    <span class="form__validation-error">{{ $message }}</span>
+    @enderror
     <label class="form-block__label" for="hit-field">Хит</label>
 </div>
 

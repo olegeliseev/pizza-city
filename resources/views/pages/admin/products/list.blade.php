@@ -15,5 +15,5 @@
         </div>
     </section>
 
-    <x-panels.pagination/>
+    <x-panels.pagination :paginator="$products"/>
 </x-layouts.app>

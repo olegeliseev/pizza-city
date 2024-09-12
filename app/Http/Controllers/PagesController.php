@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Repositories\ProductsRepositoryContract;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -9,10 +10,10 @@ use Illuminate\Contracts\View\View;
 
 class PagesController extends Controller
 {
-    public function home (): Factory|View|Application
+    public function home (ProductsRepositoryContract $productsRepository): Factory|View|Application
     {
-        $hitProducts = Product::latest()->where('hit', true)->limit(4)->get();
-        $newProducts = Product::latest()->where('new', true)->limit(4)->get();
+        $hitProducts = $productsRepository->findForMainPage('hit', 4);
+        $newProducts = $productsRepository->findForMainPage('new', 4);
 
         return view('pages.homepage', ['hitProducts' => $hitProducts, 'newProducts' => $newProducts]);
     }

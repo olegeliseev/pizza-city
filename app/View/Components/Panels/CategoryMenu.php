@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Panels;
 
+use App\Contracts\Repositories\CategoriesRepositoryContract;
 use App\Models\Category;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -15,10 +16,10 @@ class CategoryMenu extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(private readonly CategoriesRepositoryContract $categoriesRepository)
     {
         $categorySlug = Route::current()->slug;
-        $this->currentCategory = $categorySlug ? Category::where('slug', $categorySlug)->firstOrFail() : null;
+        $this->currentCategory = $categorySlug ? $this->categoriesRepository->findBySlug($categorySlug) : null;
     }
 
     /**
@@ -26,7 +27,7 @@ class CategoryMenu extends Component
      */
     public function render(): View|Closure|string
     {
-        $categories = Category::get();
+        $categories = $this->categoriesRepository->findAll();
         return view('components.panels.category-menu', ['categories' => $categories]);
     }
 

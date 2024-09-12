@@ -37,6 +37,19 @@ class ProductRequest extends FormRequest
         ];
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'new' => $this->toBoolean($this->new),
+            'hit' => $this->toBoolean($this->hit),
+        ]);
+    }
+
+    private function toBoolean($booleable): bool
+    {
+        return filter_var($booleable, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    }
+
     public function messages(): array
     {
         return [

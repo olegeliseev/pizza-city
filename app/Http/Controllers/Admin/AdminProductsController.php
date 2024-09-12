@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Contracts\Repositories\ProductsRepositoryContract;
+use App\Contracts\Services\ProductCreationServiceContract;
+use App\Contracts\Services\ProductUpdateServiceContract;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
@@ -15,12 +18,21 @@ use Illuminate\Contracts\View\View;
 
 class AdminProductsController extends Controller
 {
+    public function __construct(private readonly ProductsRepositoryContract $productsRepository)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(): Factory|View|Application
+    public function index(Request $request,): Factory|View|Application
     {
-        $products = Product::get();
+        $products = $this->productsRepository->paginateForAdmin(
+            perPage: 20,
+            fields: ['id' ,'name', 'price', 'image', 'description', 'new', 'hit'],
+            page: $request->get('page',1)
+        );
+
         return view('pages.admin.products.list', ['products' => $products]);
     }
 
@@ -35,27 +47,25 @@ class AdminProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request, FlashMessageContract $flashMessage): RedirectResponse
+    public function store(
+        ProductRequest $request,
+        FlashMessageContract $flashMessage,
+        ProductCreationServiceContract $productCreationService
+    ): RedirectResponse
     {
-        Product::create($request->validated());
-        $flashMessage->success('Товар успешно создан');
-        return redirect()->route('admin.products.index');
-    }
+        $product = $productCreationService->create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
+        $flashMessage->success('Товар успешно создан');
+
+        return redirect()->route('admin.products.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product): Factory|View|Application
+    public function edit(int $id): Factory|View|Application
     {
-        return view('pages.admin.products.edit', ['product' => $product]);
+        return view('pages.admin.products.edit', ['product' => $this->productsRepository->getById($id)]);
     }
 
     /**
@@ -63,21 +73,26 @@ class AdminProductsController extends Controller
      */
     public function update(
         ProductRequest $request,
-        Product $product,
-        FlashMessageContract $flashMessage
+        int $id,
+        FlashMessageContract $flashMessage,
+        ProductUpdateServiceContract $productUpdateService
     ): RedirectResponse {
-        $product->update(array_merge($request->validated(), ['new' => $request->has('new'), 'hit' => $request->has('hit')]));
+        $productUpdateService->update($id, $request->validated());
+
         $flashMessage->success('Товар успешно обновлен');
+
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product, FlashMessageContract $flashMessage): RedirectResponse
+    public function destroy(int $id, FlashMessageContract $flashMessage): RedirectResponse
     {
-        $product->delete();
+        $this->productsRepository->delete($id);
+
         $flashMessage->success('Товар удален');
+
         return back();
     }
 }

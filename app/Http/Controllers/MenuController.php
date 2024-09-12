@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Contracts\Repositories\ProductsRepositoryContract;
+use App\DTO\MenuFilterDTO;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -11,36 +11,33 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function menu(Request $request, ?string $slug = null): Factory|View|Application
-    {
-        $products = Product::query()
-            ->when(
-                ($search = $request->get('search')) !== null,
-                fn($query) => $query->where('name', 'like', "%$search%")
-            )
-            ->when(($sortPopularity = $request->get('sort_popularity')) !== null, fn($query) => $query->orderBy(
-                'hit',
-                $sortPopularity === 'desc' ? 'desc' : 'asc'
-            ))
-            ->when(($sortPrice = $request->get('sort_price')) !== null, fn($query) => $query->orderBy(
-                'price',
-                $sortPrice === 'desc' ? 'desc' : 'asc'
-            ))
-            ->when(($sortName = $request->get('sort_name')) !== null, fn($query) => $query->orderBy(
-                'name',
-                $sortName === 'desc' ? 'desc' : 'asc'
-            ))
-            ->when($slug, fn($query) => $query->whereHas('category', function ($query) use ($slug) {
-                $query->where('slug', $slug);
-            }))
-            ->get();
+    public function menu(
+        Request $request,
+        ProductsRepositoryContract $productsRepository,
+        ?string $slug = null
+    ): Factory|View|Application {
+        $menuFilterDTO = (new MenuFilterDTO())
+            ->setSearch($request->get('search'))
+            ->setOrderPopularity($request->get('order_popularity'))
+            ->setOrderPrice($request->get('order_price'))
+            ->setOrderName($request->get('order_name'))
+            ->setCategorySlug($slug)
+        ;
 
-        return view('pages.menu', ['products' => $products, 'currentCategory' => $slug]);
+        $products = $productsRepository->paginateForMenu(
+            menuFilterDTO: $menuFilterDTO,
+            perPage: 8,
+            fields: ['id' ,'name', 'price', 'image', 'description', 'new', 'hit'],
+            page: $request->get('page',1)
+        );
+
+        return view('pages.menu', ['products' => $products, 'currentCategory' => $slug, 'filter' => $menuFilterDTO]);
     }
 
-    public function product(Product $product): Factory|View|Application
+    public function product(int $id, ProductsRepositoryContract $productsRepository): Factory|View|Application
     {
-        $product = Product::findOrFail($product->id);
+        $product = $productsRepository->getById($id, ['category']);
+
         return view('pages.product', ['product' => $product]);
     }
 }

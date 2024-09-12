@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Forms;
 
-use App\Models\Category;
+use App\Contracts\Repositories\CategoriesRepositoryContract;
 use App\Models\Product;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -12,13 +12,14 @@ class AdminProductForm extends Component
 {
     public function __construct(
         public readonly Product $product,
-        private readonly Category $category,
+        private readonly CategoriesRepositoryContract $categoriesRepository,
     ) {
     }
 
     public function render(): View|Closure|string
     {
-        $categories = Category::get();
+        $categories = $this->categoriesRepository->findAll();
+
         return view('components.forms.admin_product-form', ['categories' => $categories]);
     }
 }
