@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Contracts\Repositories\ProductsRepositoryContract;
 use App\Contracts\Services\ProductCreationServiceContract;
 use App\Contracts\Services\ProductUpdateServiceContract;
+use App\Contracts\Services\TagsSynchronizerServiceContract;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\TagsRequest;
 use App\Models\Product;
 use App\Contracts\Services\FlashMessageContract;
 use Illuminate\Http\Request;
@@ -28,7 +30,7 @@ class AdminProductsController extends Controller
     public function index(Request $request,): Factory|View|Application
     {
         $products = $this->productsRepository->paginateForAdmin(
-            perPage: 20,
+            perPage: 10,
             fields: ['id' ,'name', 'price', 'image', 'description', 'new', 'hit'],
             page: $request->get('page',1)
         );
@@ -49,11 +51,15 @@ class AdminProductsController extends Controller
      */
     public function store(
         ProductRequest $request,
+        TagsRequest $tagsRequest,
         FlashMessageContract $flashMessage,
-        ProductCreationServiceContract $productCreationService
+        ProductCreationServiceContract $productCreationService,
+        TagsSynchronizerServiceContract $tagsSynchronizerService
     ): RedirectResponse
     {
         $product = $productCreationService->create($request->validated());
+
+        $tagsSynchronizerService->sync($product, $tagsRequest->get('tags'));
 
         $flashMessage->success('Товар успешно создан');
 
@@ -73,11 +79,15 @@ class AdminProductsController extends Controller
      */
     public function update(
         ProductRequest $request,
+        TagsRequest $tagsRequest,
         int $id,
         FlashMessageContract $flashMessage,
-        ProductUpdateServiceContract $productUpdateService
+        ProductUpdateServiceContract $productUpdateService,
+        TagsSynchronizerServiceContract $tagsSynchronizerService
     ): RedirectResponse {
-        $productUpdateService->update($id, $request->validated());
+        $product = $productUpdateService->update($id, $request->validated());
+
+        $tagsSynchronizerService->sync($product, $tagsRequest->get('tags'));
 
         $flashMessage->success('Товар успешно обновлен');
 

@@ -1,4 +1,6 @@
 @props(['product'])
-<a href="{{ route('product', $product) }}" class="product-page-img">
-    <img src="{{ $product->image }}" alt="{{ $product->name }}">
-</a>
+<div class="product-page-img">
+    <a href="{{ route('product', $product) }}">
+        <img src="{{ $product->image }}" alt="{{ $product->name }}">
+    </a>
+</div>

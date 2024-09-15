@@ -1,4 +1,5 @@
-<x-layouts.app page-title="4 сыра">
+@props(['product'])
+<x-layouts.app page-title="{{ $product->name }}">
     <x-panels.breadcrumbs/>
 
     <x-panels.product.product :product="$product"/>

@@ -100,7 +100,7 @@
 
 <div class="form-block">
     <label class="form-block__label" for="tags-field">Теги:</label>
-    <input class="form__input" placeholder="Пицца, Моццарелла, Сыр" id="tags-field" type="text">
+    <input name="tags" class="form__input" placeholder="Пицца, Моццарелла, Сыр" id="tags-field" type="text" value="{{ old('tags', $product->tags->pluck('name')->implode(',')) }}">
 </div>
 
 <div class="form-footer">

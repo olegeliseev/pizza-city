@@ -5,5 +5,5 @@
 
     <x-panels.product.product_nutritional-value :product="$product" />
 
-    <x-panels.product.product_tags/>
+    <x-panels.product.product_tags :tags="$product->tags"/>
 </div>
