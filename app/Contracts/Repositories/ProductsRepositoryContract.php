@@ -21,6 +21,7 @@ interface ProductsRepositoryContract
         array $fields = ['*'],
         string $pageName = 'page',
         int $page = 1,
+        array $relations = [],
     ): LengthAwarePaginator;
 
     public function paginateForAdmin(

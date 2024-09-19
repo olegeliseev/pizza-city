@@ -27,8 +27,9 @@ class MenuController extends Controller
         $products = $productsRepository->paginateForMenu(
             menuFilterDTO: $menuFilterDTO,
             perPage: 8,
-            fields: ['id' ,'name', 'price', 'image', 'description', 'new', 'hit'],
-            page: $request->get('page',1)
+            fields: ['id' ,'name', 'price', 'image_id', 'description', 'new', 'hit'],
+            page: $request->get('page',1),
+            relations: ['image'],
         );
 
         return view('pages.menu', ['products' => $products, 'currentCategory' => $slug, 'filter' => $menuFilterDTO]);
@@ -36,7 +37,7 @@ class MenuController extends Controller
 
     public function product(int $id, ProductsRepositoryContract $productsRepository): Factory|View|Application
     {
-        $product = $productsRepository->getById($id, ['tags']);
+        $product = $productsRepository->getById($id, ['tags', 'image']);
 
         return view('pages.product', ['product' => $product]);
     }

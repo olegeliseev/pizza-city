@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminPagesController;
 use App\Http\Controllers\Admin\AdminProductsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
 

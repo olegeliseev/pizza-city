@@ -4,7 +4,7 @@
             <div class="admin-section__content">
                 <h1 class="admin-section__title">Редактирование позиции меню</h1>
                 <x-panels.messages.flashes />
-                <form class="admin-section__form" action="{{ route('admin.products.update', ['product' => $product]) }}" method="POST">
+                <form class="admin-section__form" action="{{ route('admin.products.update', ['product' => $product]) }}" method="POST" enctype="multipart/form-data">
                     @method('PATCH')
                     <x-forms.admin_product-form :product="$product"/>
                 </form>

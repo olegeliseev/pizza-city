@@ -17,7 +17,8 @@ class Product extends Model implements HasTagsContract
         [
             'name',
             'price',
-            'image',
+//            'image',
+            'image_id',
             'description',
             'energy_value',
             'proteins',
@@ -32,10 +33,14 @@ class Product extends Model implements HasTagsContract
         'category_id' => null,
     ];
 
-    public function image(): Attribute
+    public function image(): BelongsTo
     {
-        return Attribute::get(fn($value, $attributes) => $attributes['image'] ??
-            '/assets/images/no_product.svg');
+        return $this->belongsTo(Image::class);
+    }
+
+    public function imageUrl(): Attribute
+    {
+        return Attribute::get(fn() => $this->image?->url ?: '/assets/images/products/no_product.svg');
     }
 
     public function name(): Attribute

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contracts\Repositories\ProductsRepositoryContract;
 use App\Contracts\Services\ProductCreationServiceContract;
+use App\Contracts\Services\ProductRemoverServiceContract;
 use App\Contracts\Services\ProductUpdateServiceContract;
 use App\Contracts\Services\TagsSynchronizerServiceContract;
 use App\Http\Controllers\Controller;
@@ -31,8 +32,8 @@ class AdminProductsController extends Controller
     {
         $products = $this->productsRepository->paginateForAdmin(
             perPage: 10,
-            fields: ['id' ,'name', 'price', 'image', 'description', 'new', 'hit'],
-            page: $request->get('page',1)
+            fields: ['id' ,'name', 'price', 'image_id', 'description', 'new', 'hit'],
+            page: $request->get('page',1),
         );
 
         return view('pages.admin.products.list', ['products' => $products]);
@@ -71,7 +72,7 @@ class AdminProductsController extends Controller
      */
     public function edit(int $id): Factory|View|Application
     {
-        return view('pages.admin.products.edit', ['product' => $this->productsRepository->getById($id)]);
+        return view('pages.admin.products.edit', ['product' => $this->productsRepository->getById($id, ['image'])]);
     }
 
     /**
@@ -97,9 +98,9 @@ class AdminProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id, FlashMessageContract $flashMessage): RedirectResponse
+    public function destroy(int $id, ProductRemoverServiceContract $productRemoverService, FlashMessageContract $flashMessage): RedirectResponse
     {
-        $this->productsRepository->delete($id);
+        $productRemoverService->delete($id);
 
         $flashMessage->success('Товар удален');
 

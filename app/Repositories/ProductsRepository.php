@@ -37,8 +37,9 @@ class ProductsRepository implements ProductsRepositoryContract
         array $fields = ['*'],
         string $pageName = 'page',
         int $page = 1,
+        array $relations = [],
     ): LengthAwarePaginator {
-        return $this->catalogQuery($menuFilterDTO)->paginate($perPage, $fields, $pageName, $page);
+        return $this->catalogQuery($menuFilterDTO)->with($relations)->paginate($perPage, $fields, $pageName, $page);
     }
 
     public function paginateForAdmin(
