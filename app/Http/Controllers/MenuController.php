@@ -37,7 +37,7 @@ class MenuController extends Controller
 
     public function product(int $id, ProductsRepositoryContract $productsRepository): Factory|View|Application
     {
-        $product = $productsRepository->getById($id, ['tags', 'image']);
+        $product = $productsRepository->getById($id, ['category', 'tags', 'image']);
 
         return view('pages.product', ['product' => $product]);
     }

@@ -1,5 +1,8 @@
 <x-layouts.app page-title="Меню">
-    <x-panels.breadcrumbs/>
+
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render() }}
+    </x-slot:breadcrumbs>
 
     <x-panels.filter.filter :currentCategory="$currentCategory" :filter="$filter"/>
 

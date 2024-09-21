@@ -11,9 +11,8 @@
 
     <x-layouts.parts.header/>
 
-    {{ $breadcrumbs ?? '' }}
-
     <section class="content-section">
+        {{ $breadcrumbs ?? '' }}
         {{ $slot }}
     </section>
 
