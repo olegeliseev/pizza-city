@@ -1,5 +1,5 @@
 <x-layouts.app page-title="Главная страница">
-    <x-panels.banners.banners/>
+    <x-panels.banners.banners :banners="$banners"/>
 
     @if ($hitProducts->isNotEmpty())
         <x-panels.menu.homepage.popular-section :products="$hitProducts"/>
