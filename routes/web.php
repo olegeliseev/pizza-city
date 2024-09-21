@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\AdminPagesController;
 use App\Http\Controllers\Admin\AdminProductsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Storage;
 
 Route::get('/', [PagesController::class, 'home'])->name('home');
 
@@ -16,7 +15,10 @@ Route::get('/products/{product}', [MenuController::class, 'product'])->name('pro
 
 Route::prefix('admin')
     ->name('admin.')
+    ->middleware(['auth', 'admin'])
     ->group(function (Router $router) {
         $router->get('/', [AdminPagesController::class, 'admin'])->name('admin');
         $router->resource('products', AdminProductsController::class)->except(['show']);
     });
+
+require __DIR__.'/auth.php';

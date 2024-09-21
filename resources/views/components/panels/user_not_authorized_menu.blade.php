@@ -1,6 +1,6 @@
 <ul class="user-fields">
     <li class="user-fields__link">
-        <a href="#">
+        <a href="{{ route('register') }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="#fe6902" height="16px" width="16px"
                  viewBox="0 0 448 512">
                 <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="user-fields__link">
-        <a href="#">
+        <a href="{{ route('login') }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="#fe6902" height="16px" width="16px"
                  viewBox="0 0 448 512">
                 <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
