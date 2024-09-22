@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Repositories\OrdersRepositoryContract;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 
 class ProfileController extends Controller
 {
+    public function show(Request $request, OrdersRepositoryContract $ordersRepository): Factory|View|Application
+    {
+        $orders = $ordersRepository->findAllForUser($request->user()->id);
+
+        return view('pages.profile', ['orders' => $orders]);
+    }
+
     /**
      * Display the user's profile form.
      */

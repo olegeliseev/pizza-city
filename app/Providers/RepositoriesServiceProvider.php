@@ -5,12 +5,14 @@ namespace App\Providers;
 use App\Contracts\Repositories\BannersRepositoryContract;
 use App\Contracts\Repositories\CategoriesRepositoryContract;
 use App\Contracts\Repositories\ImagesRepositoryContract;
+use App\Contracts\Repositories\OrdersRepositoryContract;
 use App\Contracts\Repositories\ProductsRepositoryContract;
 use App\Contracts\Repositories\RolesRepositoryContract;
 use App\Contracts\Repositories\TagsRepositoryContract;
 use App\Repositories\BannersRepository;
 use App\Repositories\CategoriesRepository;
 use App\Repositories\ImagesRepository;
+use App\Repositories\OrdersRepository;
 use App\Repositories\ProductsRepository;
 use App\Repositories\RolesRepository;
 use App\Repositories\TagsRepository;
@@ -26,5 +28,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->singleton(ImagesRepositoryContract::class, ImagesRepository::class);
         $this->app->singleton(RolesRepositoryContract::class, RolesRepository::class);
         $this->app->singleton(BannersRepositoryContract::class, BannersRepository::class);
+        $this->app->singleton(OrdersRepositoryContract::class, OrdersRepository::class);
+
     }
 }

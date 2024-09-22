@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\AdminPagesController;
 use App\Http\Controllers\Admin\AdminProductsController;
@@ -12,6 +13,8 @@ Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/menu/{slug?}', [MenuController::class, 'menu'])->name('menu');
 
 Route::get('/products/{product}', [MenuController::class, 'product'])->name('product');
+
+Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
 
 Route::prefix('admin')
     ->name('admin.')
