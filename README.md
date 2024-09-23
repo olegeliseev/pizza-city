@@ -6,7 +6,7 @@
 Перейдите в папку, в которой хотите поместить проект, и клонируйте репозиторий:
 
 ```sh
-$ git clone https://github.com/olegeliseev/students.git
+$ git clone https://github.com/olegeliseev/pizza-city.git
 ```
 
 Перейдите в корневую папку проекта и выполните команду:
