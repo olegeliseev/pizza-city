@@ -21,7 +21,7 @@
         </div>
     @else
         <span>У вас нет заказов</span>
-        <a href="{{ route('menu') }}" class="orders-block_back-link">
+        <a href="{{ route('menu') }}" class="back-link">
             <svg fill="#f96908" width="14px" height="14px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                 <path

@@ -431,6 +431,7 @@ body {
 
 .product-card__btn {
     border: none;
+    cursor: pointer;
     background-color: var(--main-theme-color);
     padding: 12px 30px;
     font-size: 14px;
@@ -540,6 +541,7 @@ body {
     margin-top: 10px;
     padding: 14px;
     border: none;
+    cursor: pointer;
 }
 
 .buy-block__btn:hover {
@@ -680,6 +682,7 @@ body {
     border-radius: 9999px;
     text-decoration: none;
     color: #fff;
+    cursor: pointer;
 }
 
 .recommended-card__btn:hover {
@@ -911,18 +914,6 @@ body {
     padding: 18px 20px;
 }
 
-.orders-block_back-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--main-theme-color);
-    margin-top: 16px;
-}
-
-.orders-block_back-link span {
-    margin-left: 4px;
-}
-
 .order-status-circle {
     border-radius: 50%;
     min-width: 10px;
@@ -949,6 +940,18 @@ body {
 
 .order-status__text {
     opacity: 0.6;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--main-theme-color);
+    margin-top: 16px;
+}
+
+.back-link span {
+    margin-left: 4px;
 }
 
 /* cart-section */

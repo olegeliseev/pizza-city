@@ -13,7 +13,10 @@
         </div>
         <div class="product-card__info">
             <div class="product-card__price"><x-panels.price :price="$product->price"/></div>
-            <a class="product-card__btn" href="">В корзину</a>
+            <form action="{{ route('cart.addItem', ['product' => $product]) }}" method="POST">
+                @csrf
+                <button class="product-card__btn">В корзину</button>
+            </form>
         </div>
     </div>
 </div>
