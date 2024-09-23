@@ -57,7 +57,3 @@ services:
     - ./:/var/www
     working_dir: /var/www
     tty: true
-
-  cache:
-    image: redis:latest
-    container_name: pizza-city_redis
