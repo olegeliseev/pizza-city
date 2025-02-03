@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\AdminPagesController;
 use App\Http\Controllers\Admin\AdminProductsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
 
@@ -17,12 +18,18 @@ Route::get('/products/{product}', [MenuController::class, 'product'])->name('pro
 
 Route::get('/profile', [ProfileController::class, 'show'])->middleware('auth')->name('profile');
 
-Route::middleware('auth')->get('/cart', [CartController::class, 'list'])->name('cart');
-Route::middleware('auth')->post('/cart/addItem', [CartController::class, 'addItem'])->name('cart.addItem');
-Route::middleware('auth')->post('/cart/plusOne/{itemId}', [CartController::class, 'plusOne'])->name('cart.plusOne');
-Route::middleware('auth')->post('/cart/minusOne/{itemId}', [CartController::class, 'minusOne'])->name('cart.minusOne');
-Route::middleware('auth')->post('/cart/deletePosition', [CartController::class, 'deletePosition'])->name('cart.deletePosition');
-Route::middleware('auth')->post('/cart/createOrder', [CartController::class, 'createOrder'])->name('cart.createOrder');
+Route::middleware('auth')
+    ->prefix('cart')
+    ->name('cart.')
+    ->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add/{id}', [CartController::class, 'add'])->name('add');
+        Route::patch('/update/{id}', [CartController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [CartController::class, 'delete'])->name('delete');
+        Route::delete('/clear', [CartController::class, 'clear'])->name('clear');
+});
+
+Route::middleware('auth')->post('/order/create', [OrderController::class, 'create'])->name('order.create');
 
 Route::prefix('admin')
     ->name('admin.')

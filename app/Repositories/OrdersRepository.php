@@ -14,7 +14,10 @@ class OrdersRepository implements OrdersRepositoryContract
 
     public function findAllForUser(int $userId): Collection
     {
-        return $this->getModel()->where('user_id', $userId)->get();
+        return $this->getModel()
+            ->where('user_id', $userId)
+            ->latest()
+            ->get();
     }
 
     private function getModel(): Order

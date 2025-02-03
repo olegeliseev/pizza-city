@@ -2,124 +2,108 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Repositories\OrdersRepositoryContract;
 use App\Contracts\Repositories\ProductsRepositoryContract;
+use App\Contracts\Services\CartServiceContract;
+use App\View\Components\Panels\Price;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function list(): Factory|View|Application
-    {
-        return view('pages.cart');
+    public function __construct(
+        private readonly CartServiceContract $cartService,
+        private readonly ProductsRepositoryContract $productsRepository
+    ) {
     }
-    public function addItem(Request $request, ProductsRepositoryContract $productsRepository): RedirectResponse
+
+    public function index(): Factory|View|Application
     {
-        $item = $productsRepository->getById($request->product);
+        $cart = $this->cartService->getCart();
 
-        $cart = session()->get('cart', []);
+        $products = $cart->products()->get();
 
-        $quantity = $request->quantity ?: 1;
+        return view('pages.cart', ['cart' => $cart, 'products' => $products]);
+    }
 
-        if (isset($cart[$item->id])) {
-            $cart[$item->id]['quantity'] += $quantity;
-            if (isset($cart[$item->id]['quantity'])) {
-                $cart[$item->id]['price'] = $item->price * $cart[$item->id]['quantity'];
-            } else {
-                $cart[$item->id]['price'] = $item->price * $quantity;
-            }
-        } else {
-            $cart[$item->id] = [
-                'item' => $item,
-                'quantity' => $quantity,
-                'price' => $item->price * $quantity,
-            ];
-        }
+    public function add(int $productId): JsonResponse
+    {
+        $cart = $this->cartService->getCart();
 
-        session()->put('cart', $cart);
+        $cart->products()->syncWithoutDetaching([
+            $productId => ['quantity' => 1]
+        ]);
+
+        $newCartCount = $cart->products()->get()->sum(function ($product) {
+            return $product->pivot->quantity;
+        });
+
+        return response()->json([
+            'addedToCart' => true,
+            'newCartCount' => $newCartCount ? 'Корзина (' . $newCartCount . ')' : 'Корзина',
+            'cartUrl' => route('cart.index')
+        ]);
+    }
+
+    public function update(Request $request, int $productId): JsonResponse
+    {
+        $cart = $this->cartService->getCart();
+
+        $cartItem = $cart->products()->where('product_id', $productId)->first();
+
+        $newQuantity = $this->cartService->updateQuantity($request, $cartItem);
+
+        $cart->products()->updateExistingPivot($productId, ['quantity' => $newQuantity]);
+
+        $newPrice = $cartItem->price * $newQuantity;
+
+        $newTotalPrice = $cart->products()->get()->sum(function ($product) {
+            return $product->pivot->quantity * $product->price;
+        });
+
+        $newCartCount = $cart->products()->get()->sum(function ($product) {
+            return $product->pivot->quantity;
+        });
+
+        return response()->json([
+            'itemId' => $productId,
+            'newQuantity' => $newQuantity,
+            'newPrice' => (new Price($newPrice))->formattedPrice(),
+            'newCartCount' => $newCartCount ? 'Корзина (' . $newCartCount . ')' : 'Корзина',
+            'newTotalPrice' => (new Price($newTotalPrice))->formattedPrice(),
+        ]);
+    }
+
+    public function delete(int $productId): JsonResponse
+    {
+        $cart = $this->cartService->getCart();
+
+        $cart->products()->detach($productId);
+
+        $newTotalPrice = $cart->products()->get()->sum(function ($product) {
+            return $product->pivot->quantity * $product->price;
+        });
+
+        $newCartCount = $cart->products()->get()->sum(function ($product) {
+            return $product->pivot->quantity;
+        });
+
+        return response()->json([
+            'newTotalPrice' => (new Price($newTotalPrice))->formattedPrice(),
+            'newCartCount' => $newCartCount ? 'Корзина (' . $newCartCount . ')' : 'Корзина',
+            'cartEmpty' => $cart->products()->count() === 0
+        ]);
+    }
+
+    public function clear(): RedirectResponse
+    {
+        $cart = $this->cartService->getCart();
+
+        $cart->products()->detach();
 
         return back();
-    }
-
-    public function plusOne(int $itemId, ProductsRepositoryContract $productsRepository): RedirectResponse
-    {
-        $item = $productsRepository->getById($itemId);
-
-        $cart = session()->get('cart');
-
-        if (isset($cart[$itemId])) {
-            $cart[$itemId]['quantity'] += 1;
-            $cart[$item->id]['price'] = $item->price * $cart[$item->id]['quantity'];
-        }
-
-        session()->put('cart', $cart);
-
-        return redirect()->route('cart');
-    }
-
-    public function minusOne(int $itemId, ProductsRepositoryContract $productsRepository): RedirectResponse
-    {
-        $item = $productsRepository->getById($itemId);
-
-        $cart = session()->get('cart');
-
-        if (isset($cart[$itemId])) {
-            $cart[$itemId]['quantity'] -= 1;
-            $cart[$item->id]['price'] = $item->price * $cart[$item->id]['quantity'];
-        }
-
-        if ($cart[$itemId]['quantity'] <= 0) {
-            unset($cart[$itemId]);
-            session()->put('cart', $cart);
-        }
-
-        session()->put('cart', $cart);
-
-        return redirect()->route('cart');
-    }
-
-    public function deletePosition(Request $request, ProductsRepositoryContract $productsRepository): RedirectResponse
-    {
-        $item = $productsRepository->getById($request->item);
-
-        if ($item) {
-            $cart = session()->get('cart');
-            if (isset($cart[$item->id])) {
-                unset($cart[$item->id]);
-                session()->put('cart', $cart);
-            }
-        }
-
-         return redirect()->route('cart');
-    }
-
-    public function createOrder(OrdersRepositoryContract $ordersRepository): RedirectResponse
-    {
-        $statuses = ['Оплачен', 'Не оплачен', 'Ошибка оплаты'];
-
-        $cart = session()->get('cart');
-        $sum = 0;
-        $quantity = 0;
-
-        foreach ($cart as $id => $item) {
-            $quantity += $item['quantity'];
-            $sum += $item['price'];
-        }
-
-        $fields = [
-            'quantity' => $quantity,
-            'sum' => $sum,
-            'status' => $statuses[array_rand($statuses)],
-            'user_id' => auth()->user()->id,
-        ];
-
-        $ordersRepository->create($fields);
-
-        session()->put('cart', []);
-
-         return redirect()->route('profile');
     }
 }

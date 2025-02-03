@@ -12,14 +12,12 @@ $ git clone https://github.com/olegeliseev/pizza-city.git
 Перейдите в корневую папку проекта и выполните команду:
 
 ```
-docker compose up -d
+docker compose up -d --build
 ```
 
 Перейдите в контейнер приложения и выполните команду для установки зависимостей:
 ```
 docker exec -it pizza-city_php bash
-
-cd ../
 
 composer install
 ```
@@ -29,7 +27,12 @@ composer install
 php artisan migrate:fresh --seed
 ```
 
-Перейдите в контейнер node и выполните команду для сборки фронтенда:
+Запустите команду для создания символичной ссылки на директорию с файлами:
+```
+php artisan storage:link
+```
+
+Перейдите в контейнер node.js и выполните команду для сборки фронтенда:
 ```
 docker exec -it pizza-city_node bash
 

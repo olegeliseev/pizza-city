@@ -26,6 +26,6 @@ class Price extends Component
 
     public function formattedPrice(): string
     {
-        return number_format(num: $this->price, thousands_separator: ' ');
+        return number_format(num: $this->price, thousands_separator: ' ') . ' ₽';
     }
 }

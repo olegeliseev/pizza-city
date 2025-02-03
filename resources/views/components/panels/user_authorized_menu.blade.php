@@ -1,6 +1,6 @@
 <ul class="user-fields">
     <li class="user-fields__link">
-        <x-panels.cart.cart_count/>
+        <x-panels.cart.cart_count :cart="$cart"/>
     </li>
     <li class="user-fields__link">
         <a href="{{ route('profile') }}">

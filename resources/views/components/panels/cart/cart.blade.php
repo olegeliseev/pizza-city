@@ -2,22 +2,31 @@
     <div class="container">
         <div class="cart-section__content">
             <h1 class="cart-section__title">Корзина</h1>
-            @if (!empty(session()->get('cart')))
+            @if ($cart->products()->exists())
                 <div class="cart-block">
                     <table class="cart-block__table">
                         <tbody>
-                        @foreach (session()->get('cart') as $id => $item)
-                            <x-panels.cart.cart_item :item="$item['item']" :quantity="$item['quantity']" :price="$item['price']"/>
+                        @foreach ($products as $id => $item)
+                            <x-panels.cart.cart_item :item="$item"/>
                         @endforeach
                         </tbody>
                     </table>
 
-                    <div class="cart-block__total">
-                        <span class="cart-block__total__text">Общая сумма заказа: </span>
-                        <span class="cart-block__total__price"><x-panels.cart.cart_sum/></span>
+                    <div class="cart-block__footer">
+                        <div class="cart-block__total">
+                            <span class="cart-block__total__text">Общая сумма заказа: </span>
+                            <span class="cart-block__total__price"><x-panels.price :price="$cart->getTotalPrice()" /></span>
+                        </div>
+                        <div class="cart-block__clear">
+                            <form action="{{ route('cart.clear') }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="cart-block__clear__btn" onclick="return confirm('Вы уверены, что хотите полностью очистить корзину?')">Очистить корзину</button>
+                            </form>
+                        </div>
                     </div>
 
-                    <form action="{{ route('cart.createOrder') }}" method="POST">
+                    <form class="cart-block__create-order" action="{{ route('order.create') }}" method="POST">
                         @csrf
                         <button type="submit" class="cart-block__order-btn">Оформить заказ</button>
                     </form>

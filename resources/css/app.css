@@ -65,7 +65,7 @@ body {
 }
 
 .logo {
-    font-size: 40px;
+    font-size: 2.5rem;
 }
 
 .logo a {
@@ -108,7 +108,6 @@ body {
 .user-fields__logout-btn {
     background: none;
     cursor: pointer;
-    font-size: 16px;
     display: flex;
 }
 
@@ -247,7 +246,6 @@ body {
     margin-left: 14px;
     border: none;
     background: none;
-    font-size: 16px;
     cursor: pointer;
 }
 
@@ -269,7 +267,7 @@ body {
 .banner-slide {
     padding-left: 150px;
     padding-top: 130px;
-    font-size: 30px;
+    font-size: 1.875rem;
     color: #fff;
     height: 500px !important;
     background-size: cover !important;
@@ -309,7 +307,7 @@ body {
     color: #fff;
     padding: 10px;
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
 }
 
@@ -396,7 +394,7 @@ body {
 
 .product-card__title {
     display: block;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -409,7 +407,7 @@ body {
 }
 
 .product-card__description {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
     color: var(--description-color);
     margin-bottom: 20px;
@@ -425,7 +423,7 @@ body {
 }
 
 .product-card__price {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 800;
 }
 
@@ -434,14 +432,25 @@ body {
     cursor: pointer;
     background-color: var(--main-theme-color);
     padding: 12px 30px;
-    font-size: 14px;
+    font-size: 0.875rem;
     border-radius: 9999px;
     text-decoration: none;
     color: #fff;
+    transition: opacity 0.2s linear;
 }
 
 .product-card__btn:hover {
     opacity: 0.6;
+}
+
+.product-card__btn-reverse {
+    opacity: 0.6;
+    transition: opacity 0.2s linear;
+    display: inline-block;
+}
+
+.product-card__btn-reverse:hover {
+    opacity: 1;
 }
 
 /* product-page */
@@ -464,7 +473,7 @@ body {
 }
 
 .product-page-title {
-    font-size: 34px;
+    font-size: 2.125rem;
     margin: 0 auto 20px auto;
     max-width: 80%;
 }
@@ -523,7 +532,7 @@ body {
 }
 
 .buy-block__price {
-    font-size: 30px;
+    font-size: 1.875rem;
     font-weight: 600;
 }
 
@@ -537,11 +546,12 @@ body {
     color: #fff;
     border: none;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 1.25rem;
     margin-top: 10px;
     padding: 14px;
     border: none;
     cursor: pointer;
+    transition: background-color 0.2s linear;
 }
 
 .buy-block__btn:hover {
@@ -550,6 +560,15 @@ body {
 
 .buy-block__btn span {
     margin-left: 10px;
+}
+
+.buy-block__btn-reverse {
+    transition: opacity 0.2s linear;
+    opacity: 0.6;
+}
+
+.buy-block__btn-reverse:hover {
+    opacity: 1;
 }
 
 .description-block, .nutritional-value-block {
@@ -600,7 +619,7 @@ body {
     line-height: 2.5;
     text-decoration: none;
     color: #000;
-    font-size: 14px;
+    font-size: 0.875rem;
     border: 1px dashed #dbdbdb;
     border-radius: 5px;
     padding: 4px 8px;
@@ -666,7 +685,7 @@ body {
 }
 
 .recommended-card__price {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 600;
 }
 
@@ -678,15 +697,27 @@ body {
     border: none;
     background-color: var(--main-theme-color);
     padding: 12px 14px;
-    font-size: 14px;
+    font-size: 0.875rem;
     border-radius: 9999px;
     text-decoration: none;
     color: #fff;
     cursor: pointer;
+    transition: opacity 0.2s linear;
+    display: inline-block;
 }
 
 .recommended-card__btn:hover {
     opacity: 0.6;
+}
+
+.recommended-card__btn-reverse {
+    transition: opacity 0.2s linear;
+    opacity: 0.6;
+    display: inline-block;
+}
+
+.recommended-card__btn-reverse:hover {
+    opacity: 1;
 }
 
 /* auth-section */
@@ -711,7 +742,7 @@ body {
 .auth-section__title {
     margin: 20px 0 40px 0;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 1.875rem;
 }
 
 .form-block {
@@ -749,7 +780,7 @@ body {
 .form__validation-error {
     font-style: italic;
     color: #dc2626;
-    font-size: 12px;
+    font-size: 0.75rem;
     margin-top: 6px;
 }
 
@@ -782,7 +813,6 @@ body {
     border: none;
     background-color: var(--main-theme-color);
     padding: 10px 20px;
-    font-size: 16px;
     font-weight: 600;
     border-radius: 4px;
     text-decoration: none;
@@ -869,7 +899,7 @@ body {
 .profile-section__title {
     margin: 20px 0 20px 0;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 1.875rem;
 }
 
 .orders-block {
@@ -971,7 +1001,7 @@ body {
 .cart-section__title {
     margin: 20px 0 20px 0;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 1.875rem;
 }
 
 .cart-section__content {
@@ -1046,7 +1076,6 @@ body {
 }
 
 .cart-block__input {
-    font-size: 16px;
     padding: 10px;
     margin: 0 10px;
     width: 60px;
@@ -1056,6 +1085,13 @@ body {
     border: 1px solid rgba(156, 163, 175, .5);
     box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(0, 0, 0, .05);
     outline: none;
+    text-align: center;
+}
+
+.cart-block__input::-webkit-inner-spin-button,
+.cart-block__input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .cart-block__quantity-btn {
@@ -1080,21 +1116,34 @@ body {
     opacity: 0.6;
 }
 
-.cart-block__total {
+.cart-block__footer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-top: 30px;
 }
 
 .cart-block__total__text {
     color: #9ca3af;
-    font-size: 16px;
 }
 
 .cart-block__total__price {
     margin-left: 6px;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 1.25rem;
+}
+
+.cart-block__clear__btn {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s linear;
+    font-size: 1rem;
+}
+
+.cart-block__clear__btn:hover {
+    color: #0a0000;
 }
 
 .cart-block__order-btn {
@@ -1102,12 +1151,13 @@ body {
     border: none;
     background-color: var(--main-theme-color);
     padding: 12px 20px;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
     border-radius: 4px;
     text-decoration: none;
     color: #fff;
     cursor: pointer;
+    transition: opacity 0.2s linear;
 }
 
 .cart-block__order-btn:hover {
@@ -1177,7 +1227,7 @@ body {
 .admin-section__title {
     margin: 20px 0 40px 0;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 1.875rem;
 }
 
 .admin-section__content {
@@ -1222,7 +1272,7 @@ body {
 .admin-card__text a {
     text-decoration: none;
     color: #000;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 600;
 }
 
@@ -1239,7 +1289,7 @@ body {
     padding: 12px 20px;
     border-radius: 4px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
 }
 
@@ -1495,7 +1545,7 @@ body {
 
     .user-fields {
         justify-content: center;
-        font-size: 12px;
+        font-size: 0.75rem;
     }
 
     /* bottom-nav */
@@ -1616,7 +1666,7 @@ body {
     .banner-slide {
         padding-left: 10px;
         padding-top: 100px;
-        font-size: 30px;
+        font-size: 1.875rem;
         height: 500px !important;
         background-size: cover !important;
     }
@@ -1670,3 +1720,16 @@ body {
     }
 }
 
+@media (max-width: 480px) {
+    .cart-block__footer {
+        display: block;
+    }
+
+    .cart-block__clear {
+        margin: 20px 0;
+    }
+
+    .cart-block__create-order {
+        margin-bottom: 30px;
+    }
+}

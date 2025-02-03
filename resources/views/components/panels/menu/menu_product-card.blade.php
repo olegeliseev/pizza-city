@@ -1,3 +1,4 @@
+@props(['product', 'cart'])
 <div class="product-card">
     @if($product->new)
         <div class="new-tag">Новинка</div>
@@ -13,9 +14,17 @@
         </div>
         <div class="product-card__info">
             <div class="product-card__price"><x-panels.price :price="$product->price"/></div>
-            <form action="{{ route('cart.addItem', ['product' => $product]) }}" method="POST">
+            <form action="{{ route('cart.add', ['id' => $product->id]) }}" data-id="{{ $product->id }}" method="POST">
                 @csrf
-                <button class="product-card__btn">В корзину</button>
+                @if(!$cart)
+                    <a href="{{ route('cart.index') }}" class="product-card__btn">В корзину</a>
+                @else
+                    @if(!$cart->products()->wherePivot('product_id', $product->id)->exists())
+                        <button class="product-card__btn">В корзину</button>
+                    @else
+                        <a href="{{ route('cart.index') }}" class="product-card__btn product-card__btn-reverse">В корзине</a>
+                    @endif
+                @endif
             </form>
         </div>
     </div>

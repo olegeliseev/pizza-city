@@ -16,7 +16,7 @@
                     </a>
                 </span>
             @auth()
-                <x-panels.user_authorized_menu/>
+                <x-panels.user_authorized_menu :cart="$cart" />
             @else
                 <x-panels.user_not_authorized_menu/>
             @endauth

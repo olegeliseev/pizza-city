@@ -57,4 +57,16 @@ class Product extends Model implements HasTagsContract
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function carts(): BelongsToMany
+    {
+        return $this->belongsToMany(Cart::class)
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }

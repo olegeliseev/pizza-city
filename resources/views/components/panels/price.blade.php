@@ -1,1 +1,1 @@
-{{ $formattedPrice() }} ₽
+{{ $formattedPrice() }}
